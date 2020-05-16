@@ -6,7 +6,3 @@ const script = `
 const element = document.createElement("script");
 element.innerHTML = script;
 document.documentElement.appendChild(element);
-
-setTimeout(() => {
-  document.;
-}, 5000);
