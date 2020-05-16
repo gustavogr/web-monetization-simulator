@@ -1,7 +1,12 @@
-const monetizationHeader = document.head.querySelector(
-  "meta[name=monetization]"
-);
+document.monetization = document.createElement("div");
+document.monetization.state = "stopped";
+console.log("Added monetization element");
+console.log(document.monetization);
+console.log("State", document.monetization.state);
 
-if (monetizationHeader) {
-  alert("Your site has monetization!");
-}
+// const monetizationHeader = document.head.querySelector(
+//   "meta[name=monetization]"
+// );
+
+// if (monetizationHeader) {
+// }
