@@ -1,12 +1,12 @@
-document.monetization = document.createElement("div");
-document.monetization.state = "stopped";
-console.log("Added monetization element");
-console.log(document.monetization);
-console.log("State", document.monetization.state);
+const script = `
+  document.monetization = document.createElement("div");
+  document.monetization.state = "stopped";
+`;
 
-// const monetizationHeader = document.head.querySelector(
-//   "meta[name=monetization]"
-// );
+const element = document.createElement("script");
+element.innerHTML = script;
+document.documentElement.appendChild(element);
 
-// if (monetizationHeader) {
-// }
+setTimeout(() => {
+  document.;
+}, 5000);
