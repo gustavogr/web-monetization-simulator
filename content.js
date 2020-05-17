@@ -1,5 +1,5 @@
 const script = `
-  document.monetization = document.createElement("div");
+  document.monetization = new EventTarget();
   document.monetization.state = "stopped";
 
   window.addEventListener("message", function(event) {
@@ -9,7 +9,7 @@ const script = `
 
     if (event.data.type === "monetization_event") {
       console.log("Recieved monetization event: " + event.data.event);
-      event = new CustomEvent("monetizationstart", {detail: event.data.event});
+      event = new CustomEvent("monetizationstart", { detail: event.data.event });
       document.monetization.dispatchEvent(event);
     }
   }, false);
@@ -20,5 +20,8 @@ element.innerHTML = script;
 document.documentElement.appendChild(element);
 
 window.addEventListener("DOMContentLoaded", (e) => {
-  window.postMessage({ type: "monetization_event", event: {somedaa: "thatdata"}}, "*");
+  window.postMessage(
+    { type: "monetization_event", event: { somedaa: "thatdata" } },
+    "*"
+  );
 });
