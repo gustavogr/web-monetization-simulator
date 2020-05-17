@@ -3,8 +3,20 @@
   </head>
   <body>
     <form id="money-form">
+      <label>Currency</label>
+      <input type="text" name="currency"></input>
+
+      <label>Amount</label>
       <input type="text" name="amount"></input>
+
+      <label>Interval</label>
+      <input type="text" name="interval"></input>
+
+      <label>Amount limit</label>
+      <input type="text" name="limit"></input>
+
       <button type="submit">Save</button>
+      <button id="stop-payment">Stop payment</button>
     </form>
 
     <script src="popup.js"></script>
