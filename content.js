@@ -12,7 +12,7 @@ function uuidv4() {
 
 // Change monetization state
 
-function changeState(state) {
+function changeMonetizationState(state) {
   const states = ["stopped", "pending", "started"];
   if (!states.includes(state)) {
     console.warn("State not allowed:", state);
