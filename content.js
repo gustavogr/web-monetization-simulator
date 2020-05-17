@@ -7,10 +7,17 @@ const script = `
     if (event.source != window)
       return;
 
-    if (event.data.type === "monetization_event") {
+    if (event.data.type === "monetizationEvent") {
       console.log("Recieved monetization event: " + event.data.event);
       event = new CustomEvent("monetizationstart", { detail: event.data.event });
       document.monetization.dispatchEvent(event);
+      return;
+    }
+
+    if (event.data.type === "monetizationStateChange") {
+      console.log("Recieved monetization state change: " + event.data.state);
+      document.monetization.state = event.data.state
+      return;
     }
   }, false);
 `;
@@ -21,7 +28,9 @@ document.documentElement.appendChild(element);
 
 window.addEventListener("DOMContentLoaded", (e) => {
   window.postMessage(
-    { type: "monetization_event", event: { somedaa: "thatdata" } },
+    { type: "monetizationEvent", event: { somedaa: "thatdata" } },
     "*"
   );
+
+  window.postMessage({ type: "monetizationStateChange", state: "pending" });
 });
