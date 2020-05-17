@@ -34,3 +34,9 @@ window.addEventListener("DOMContentLoaded", (e) => {
 
   window.postMessage({ type: "monetizationStateChange", state: "pending" });
 });
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.message === "popupFormSubmit") {
+    console.log("received message from popup", request.data);
+  }
+});
