@@ -98,12 +98,12 @@ function dispatchMonetizationProgress({
 const script = `
     document.monetization = new EventTarget();
     document.monetization.state = "stopped";
-  
+
     window.addEventListener("message", function(event) {
       // We only accept messages from ourselves
       if (event.source != window)
         return;
-  
+
       if (event.data.type === "monetizationEvent") {
         const payload = event.data.event
         console.log("Recieved monetization event: " + payload);
@@ -111,7 +111,7 @@ const script = `
         document.monetization.dispatchEvent(event);
         return;
       }
-  
+
       if (event.data.type === "monetizationStateChange") {
         console.log("Recieved monetization state change: " + event.data.state);
         document.monetization.state = event.data.state
@@ -124,6 +124,7 @@ const script = `
 
 let sessionId;
 let paymentPointer;
+let data;
 sessionId = uuidv4();
 
 const element = document.createElement("script");
@@ -136,7 +137,11 @@ window.addEventListener("DOMContentLoaded", (e) => {
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message === "popupFormSubmit") {
-    console.log("received message from popup", request.data);
+    data = request.data;
+    dispatchMonetizationStart({ paymentPointer, requestId: sessionId });
+  }
+
+  if (request.message === "popupGetValues") {
+    sendResponse(data);
   }
 });
-console.log(sessionId);
