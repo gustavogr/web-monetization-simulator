@@ -125,19 +125,31 @@ const script = `
 let sessionId;
 let paymentPointer;
 let data;
-sessionId = uuidv4();
 
 const element = document.createElement("script");
 element.innerHTML = script;
 document.documentElement.appendChild(element);
 
-window.addEventListener("DOMContentLoaded", (e) => {
-  dispatchMonetizationStart({ paymentPointer, requestId: sessionId });
+// TODO: we should also add a MutationObserver in case the meta monetization tag
+//       is set dynamically and not hardcoded on the incoming HTML.
+
+document.addEventListener("DOMContentLoaded", (e) => {
+  let meta_monetization = document.querySelector('meta[name="monetization"]');
+
+  if (meta_monetization) {
+    paymentPointer = meta_monetization.content;
+    sessionId = uuidv4();
+    changeMonetizationState("pending");
+    dispatchMonetizationPending({ paymentPointer, requestId: sessionId });
+  } else {
+    data = "noMonetization";
+  }
 });
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message === "popupFormSubmit") {
     data = request.data;
+    changeMonetizationState("started");
     dispatchMonetizationStart({ paymentPointer, requestId: sessionId });
   }
 

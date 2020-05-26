@@ -2,7 +2,11 @@
   <head>
   </head>
   <body>
-    <form id="money-form">
+    <div id="no-monetization" hidden>
+      <h2>Site has no monetization</h2>
+      <p>No meta tag with name "monetization" found.</p>
+    </div>
+    <form id="money-form" hidden>
       <label>Currency</label>
       <input type="text" name="currency"></input>
 
@@ -21,7 +25,6 @@
       <button type="submit">Save</button>
       <button id="stop-payment">Stop payment</button>
     </form>
-
     <script src="popup.js"></script>
   </body>
 </html>
