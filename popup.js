@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
           form.scale.value = response.scale;
           form.amount.value = response.amount;
           form.interval.value = response.interval;
-          form.limit.value = response.limit;
+          // form.limit.value = response.limit;
           progressMonetization.removeAttribute("hidden");
         } else {
           form.removeAttribute("hidden");

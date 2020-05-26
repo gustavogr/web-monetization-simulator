@@ -157,13 +157,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     });
 
     intervalHandler = setInterval(() => {
-      dispatchMonetizationProgress({
-        paymentPointer,
-        requestId: sessionId,
-        assetCode: data.currency,
-        assetScale: data.scale,
-        amount: data.amount
-      });
+      if(document.visibilityState === "visible")
+        dispatchMonetizationProgress({
+          paymentPointer,
+          requestId: sessionId,
+          assetCode: data.currency,
+          assetScale: data.scale,
+          amount: data.amount
+        });
     }, data.interval);
   }
 
