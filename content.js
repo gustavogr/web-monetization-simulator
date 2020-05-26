@@ -82,7 +82,6 @@ function dispatchMonetizationProgress({
         detail: {
           paymentPointer,
           requestId,
-          finalized,
           amount,
           assetCode,
           assetScale,
@@ -121,10 +120,10 @@ const script = `
   `;
 
 // Extension setup
-
 let sessionId;
 let paymentPointer;
 let data;
+let intervalHandler;
 
 const element = document.createElement("script");
 element.innerHTML = script;
@@ -151,6 +150,23 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     data = request.data;
     changeMonetizationState("started");
     dispatchMonetizationStart({ paymentPointer, requestId: sessionId });
+    dispatchMonetizationProgress({
+      paymentPointer,
+      requestId: sessionId,
+      assetCode: data.currency,
+      assetScale: data.scale,
+      amount: data.amount
+    });
+
+    intervalHandler = setInterval(() => {
+      dispatchMonetizationProgress({
+        paymentPointer,
+        requestId: sessionId,
+        assetCode: data.currency,
+        assetScale: data.scale,
+        amount: data.amount
+      });
+    }, data.interval);
   }
 
   if (request.message === "popupGetValues") {

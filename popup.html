@@ -6,6 +6,12 @@
       <h2>Site has no monetization</h2>
       <p>No meta tag with name "monetization" found.</p>
     </div>
+
+    <div id="progress-monetization" hidden>
+      <h2>Sending payments to site</h2>
+      <button id="stop-payment">Stop payment</button>
+    </div>
+
     <form id="money-form" hidden>
       <label>Currency</label>
       <input type="text" name="currency"></input>
@@ -16,14 +22,13 @@
       <label>Amount</label>
       <input type="number" name="amount"></input>
 
-      <label>Interval</label>
+      <label>Interval (ms)</label>
       <input type="number" name="interval"></input>
 
       <label>Amount limit</label>
       <input type="number" name="limit"></input>
 
       <button type="submit">Save</button>
-      <button id="stop-payment">Stop payment</button>
     </form>
     <script src="popup.js"></script>
   </body>

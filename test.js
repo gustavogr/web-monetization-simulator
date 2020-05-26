@@ -5,5 +5,9 @@ document.monetization.addEventListener("monetizationpending", (e) => {
 });
 
 document.monetization.addEventListener("monetizationstart", (e) => {
-  console.log("recieved money event", e);
+  console.log("monetization has started", e.detail);
+});
+
+document.monetization.addEventListener("monetizationprogress", (e) => {
+  console.log("monetization is in progress", e.detail);
 });

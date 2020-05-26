@@ -1,15 +1,18 @@
 const noMonetization = document.getElementById('no-monetization');
+const progressMonetization = document.getElementById('progress-monetization');
 const form = document.getElementById('money-form');
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
+    form.setAttribute("hidden", "true");
+    progressMonetization.removeAttribute("hidden");
 
     data = {
-        "currency" : e.target.currency.value,
-        "scale" : new Number(e.target.scale.value),
-        "amount" : new Number(e.target.amount.value),
-        "interval" : new Number(e.target.interval.value),
-        "limit" : new Number(e.target.limit.value)
+        currency: e.target.currency.value,
+        scale: new Number(e.target.scale.value),
+        amount: new Number(e.target.amount.value),
+        interval: new Number(e.target.interval.value),
+        limit: new Number(e.target.limit.value)
     };
 
     chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
@@ -30,6 +33,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
           form.amount.value = response.amount;
           form.interval.value = response.interval;
           form.limit.value = response.limit;
+          progressMonetization.removeAttribute("hidden");
+        } else {
+          form.removeAttribute("hidden");
         }
       });
     });
