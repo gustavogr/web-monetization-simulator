@@ -105,14 +105,12 @@ const script = `
 
       if (event.data.type === "monetizationEvent") {
         const payload = event.data.event
-        console.log("Recieved monetization event: " + payload);
         event = new CustomEvent(payload.type, { detail: payload.detail });
         document.monetization.dispatchEvent(event);
         return;
       }
 
       if (event.data.type === "monetizationStateChange") {
-        console.log("Recieved monetization state change: " + event.data.state);
         document.monetization.state = event.data.state
         return;
       }
@@ -171,5 +169,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
   if (request.message === "popupGetValues") {
     sendResponse(data);
+  }
+
+  if (request.message === "popupStopPayments") {
+    clearInterval(intervalHandler);
+    changeMonetizationState("stopped");
+    dispatchMonetizationStop({paymentPointer, requestId: sessionId, finalized: false});
   }
 });

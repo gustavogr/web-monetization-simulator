@@ -11,3 +11,7 @@ document.monetization.addEventListener("monetizationstart", (e) => {
 document.monetization.addEventListener("monetizationprogress", (e) => {
   console.log("monetization is in progress", e.detail);
 });
+
+document.monetization.addEventListener("monetizationstop", (e) => {
+  console.log("monetization has stopped", e.detail);
+});
