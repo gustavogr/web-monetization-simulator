@@ -146,6 +146,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message === "popupFormSubmit") {
     data = request.data;
+    data.active = true;
     changeMonetizationState("started");
     dispatchMonetizationStart({ paymentPointer, requestId: sessionId });
     dispatchMonetizationProgress({
@@ -153,17 +154,17 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       requestId: sessionId,
       assetCode: data.currency,
       assetScale: data.scale,
-      amount: data.amount
+      amount: data.amount,
     });
 
     intervalHandler = setInterval(() => {
-      if(document.visibilityState === "visible")
+      if (document.visibilityState === "visible")
         dispatchMonetizationProgress({
           paymentPointer,
           requestId: sessionId,
           assetCode: data.currency,
           assetScale: data.scale,
-          amount: data.amount
+          amount: data.amount,
         });
     }, data.interval);
   }
@@ -173,8 +174,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 
   if (request.message === "popupStopPayments") {
+    data.active = false;
     clearInterval(intervalHandler);
     changeMonetizationState("stopped");
-    dispatchMonetizationStop({paymentPointer, requestId: sessionId, finalized: false});
+    dispatchMonetizationStop({
+      paymentPointer,
+      requestId: sessionId,
+      finalized: false,
+    });
   }
 });

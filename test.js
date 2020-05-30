@@ -1,5 +1,3 @@
-console.log("Monetization in test script:", document.monetization);
-
 document.monetization.addEventListener("monetizationpending", (e) => {
   console.log("monetization is pending", e.detail);
 });
