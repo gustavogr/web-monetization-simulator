@@ -5,8 +5,8 @@ const stopPayments = document.getElementById("stop-payment");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  form.setAttribute("hidden", "true");
-  progressMonetization.removeAttribute("hidden");
+  form.classList.add("hidden");
+  progressMonetization.classList.remove("hidden");
 
   data = {
     currency: e.target.currency.value,
@@ -29,8 +29,8 @@ stopPayments.addEventListener("click", () => {
     let activeTab = tabs[0];
     chrome.tabs.sendMessage(activeTab.id, { message: "popupStopPayments" });
   });
-  progressMonetization.setAttribute("hidden", "true");
-  form.removeAttribute("hidden");
+  progressMonetization.classList.add("hidden");
+  form.classList.remove("hidden");
 });
 
 document.addEventListener("DOMContentLoaded", (e) => {
@@ -41,11 +41,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
       { message: "popupGetValues" },
       (response) => {
         if (!response) {
-          form.removeAttribute("hidden");
+          form.classList.remove("hidden");
           return;
         }
         if (response === "noMonetization") {
-          noMonetization.removeAttribute("hidden");
+          noMonetization.classList.remove("hidden");
           return;
         }
 
@@ -55,9 +55,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
         form.interval.value = response.interval;
 
         if (response.active) {
-          progressMonetization.removeAttribute("hidden");
+          progressMonetization.classList.remove("hidden");
         } else {
-          form.removeAttribute("hidden");
+          form.classList.remove("hidden");
         }
       }
     );

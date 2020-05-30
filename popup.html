@@ -1,35 +1,53 @@
 <html>
   <head>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
   </head>
-  <body>
-    <div id="no-monetization" hidden>
-      <h2>Site has no monetization</h2>
-      <p>No meta tag with name "monetization" found.</p>
+  <body class="font-sans text-sm">
+    <div class="w-64 h-64 container flex flex-col items-center justify-start bg-gray-200 rounded border">
+      <div id="header" class="flex flex-grow-0 items-center justify-center text-lg">
+        <h1>Web Monetization Tool</h1>
+      </div>
+      <div class="border-t p-3 h-full">
+        <div id="no-monetization" class="flex flex-col justify-center text-center h-full hidden">
+          <h2 class="text-lg mb-3">Site has no monetization</h2>
+          <p>No meta tag with name "monetization" found.</p>
+        </div>
+        
+        <div id="progress-monetization" class="flex flex-col justify-center text-center h-full hidden">
+          <h2 class="text-lg mb-3">Sending payments to site</h2>
+          <button id="stop-payment" class="self-center bg-blue-300 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded">
+            Stop payment
+          </button>
+        </div>
+        
+        <form id="money-form" class="flex flex-col justify-around h-full m-0 hidden">
+          <div class="flex items-center justify-between">
+            <label>Currency</label>
+            <input class="shadow appearance-none border rounded w-3/5 py-2 px-3 text-gray-700 leading-none focus:outline-none focus:shadow-outline" type="text" name="currency"></input>
+          </div>
+          
+          <div class="flex items-center justify-between">
+            <label>Scale</label>
+            <input class="shadow appearance-none border rounded w-3/5 py-2 px-3 text-gray-700 leading-none focus:outline-none focus:shadow-outline" type="number" name="scale"></input>
+          </div>
+          
+          <div class="flex items-center justify-between">
+            <label>Amount</label>
+            <input class="shadow appearance-none border rounded w-3/5 py-2 px-3 text-gray-700 leading-none focus:outline-none focus:shadow-outline" type="number" name="amount"></input>
+          </div>
+          
+          <div class="flex items-center justify-between">
+            <label>Interval (ms)</label>
+            <input class="shadow appearance-none border rounded w-3/5 py-2 px-3 text-gray-700 leading-none focus:outline-none focus:shadow-outline" type="number" name="interval"></input>
+          </div>
+          
+          <button type="submit" class="self-center bg-blue-300 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded">
+            Save
+          </button>
+        </form>
+      </div>
     </div>
-
-    <div id="progress-monetization" hidden>
-      <h2>Sending payments to site</h2>
-      <button id="stop-payment">Stop payment</button>
-    </div>
-
-    <form id="money-form" hidden>
-      <label>Currency</label>
-      <input type="text" name="currency"></input>
-
-      <label>Scale</label>
-      <input type="number" name="scale"></input>
-
-      <label>Amount</label>
-      <input type="number" name="amount"></input>
-
-      <label>Interval (ms)</label>
-      <input type="number" name="interval"></input>
-
-      <!-- <label>Amount limit</label>
-      <input type="number" name="limit"></input> -->
-
-      <button type="submit">Save</button>
-    </form>
     <script src="popup.js"></script>
   </body>
 </html>
