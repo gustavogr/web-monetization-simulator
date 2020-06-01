@@ -123,9 +123,9 @@ let paymentPointer;
 let data;
 let intervalHandler;
 
-const element = document.createElement("script");
-element.innerHTML = script;
-document.documentElement.appendChild(element);
+const scriptElement = document.createElement("script");
+scriptElement.innerHTML = script;
+(document.head || document.documentElement).appendChild(scriptElement);
 
 // TODO: we should also add a MutationObserver in case the meta monetization tag
 //       is set dynamically and not hardcoded on the incoming HTML.
@@ -141,6 +141,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   } else {
     data = "noMonetization";
   }
+  scriptElement.remove();
 });
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
