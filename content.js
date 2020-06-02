@@ -138,6 +138,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     sessionId = uuidv4();
     changeMonetizationState("pending");
     dispatchMonetizationPending({ paymentPointer, requestId: sessionId });
+    chrome.runtime.sendMessage({message: "monetizationPending"});
   } else {
     data = "noMonetization";
   }

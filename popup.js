@@ -17,6 +17,7 @@ form.addEventListener("submit", (e) => {
 
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     let activeTab = tabs[0];
+    chrome.browserAction.setBadgeText({text: "$", tabId: activeTab.id});
     chrome.tabs.sendMessage(activeTab.id, {
       message: "popupFormSubmit",
       data: data,
@@ -27,6 +28,7 @@ form.addEventListener("submit", (e) => {
 stopPayments.addEventListener("click", () => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     let activeTab = tabs[0];
+    chrome.browserAction.setBadgeText({text: "", tabId: activeTab.id});
     chrome.tabs.sendMessage(activeTab.id, { message: "popupStopPayments" });
   });
   progressMonetization.classList.add("hidden");
