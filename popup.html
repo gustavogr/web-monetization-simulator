@@ -5,21 +5,21 @@
   <body class="font-sans text-sm">
     <div class="w-64 rounded border">
       <div id="header" class="bg-gray-200 w-full flex flex-grow-0 items-center justify-center text-lg p-1">
-        <h1>Monetization Tester</h1>
+        <h1>Web Monetization Simulator</h1>
       </div>
       <div class="border-t p-2">
         <div id="no-monetization" class="flex flex-col justify-center text-center h-56 hidden">
           <h2 class="text-lg mb-3">Site has no monetization</h2>
           <p>No meta tag with name "monetization" found.</p>
         </div>
-        
+
         <div id="progress-monetization" class="flex flex-col justify-center text-center h-56 hidden">
           <h2 class="text-lg mb-3">Sending payments to site</h2>
           <button id="stop-payment" class="self-center bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
             Stop payment
           </button>
         </div>
-        
+
         <form id="money-form" class="flex flex-col justify-around m-0 h-56 hidden">
           <div class="mb-2">
             <label class="block text-gray-700 text-xs font-bold" for="currency">
@@ -36,7 +36,7 @@
               </div>
             </div>
           </div>
-          
+
           <div class="mb-2 flex">
             <div class="mr-2">
               <label class="block text-gray-700 text-xs font-bold" for="amount">
@@ -44,7 +44,7 @@
               </label>
               <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-none focus:outline-none focus:shadow-outline" type="number" name="amount" min=1></input>
             </div>
-            
+
             <div>
               <label class="block text-gray-700 text-xs font-bold" for="scale">
                 Scale
@@ -52,14 +52,14 @@
               <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-none focus:outline-none focus:shadow-outline" type="number" name="scale" min=1></input>
             </div>
           </div>
-          
+
           <div class="mb-2">
             <label class="block text-gray-700 text-xs font-bold" for="interval">
               Interval (ms)
             </label>
             <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-none focus:outline-none focus:shadow-outline" type="number" name="interval"></input>
           </div>
-          
+
           <button type="submit" class=" bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
             Save
           </button>
