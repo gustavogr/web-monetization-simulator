@@ -2,6 +2,7 @@ const noMonetization = document.getElementById("no-monetization");
 const progressMonetization = document.getElementById("progress-monetization");
 const form = document.getElementById("money-form");
 const stopPayments = document.getElementById("stop-payment");
+const notInLocalEnv = document.getElementById("no-local-env");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -17,7 +18,7 @@ form.addEventListener("submit", (e) => {
 
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     let activeTab = tabs[0];
-    chrome.browserAction.setBadgeText({text: "$", tabId: activeTab.id});
+    chrome.browserAction.setBadgeText({ text: "$", tabId: activeTab.id });
     chrome.tabs.sendMessage(activeTab.id, {
       message: "popupFormSubmit",
       data: data,
@@ -28,7 +29,7 @@ form.addEventListener("submit", (e) => {
 stopPayments.addEventListener("click", () => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     let activeTab = tabs[0];
-    chrome.browserAction.setBadgeText({text: "", tabId: activeTab.id});
+    chrome.browserAction.setBadgeText({ text: "", tabId: activeTab.id });
     chrome.tabs.sendMessage(activeTab.id, { message: "popupStopPayments" });
   });
   progressMonetization.classList.add("hidden");
@@ -43,7 +44,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
       { message: "popupGetValues" },
       (response) => {
         if (!response) {
-          form.classList.remove("hidden");
+          notInLocalEnv.classList.remove("hidden");
           return;
         }
         if (response === "noMonetization") {

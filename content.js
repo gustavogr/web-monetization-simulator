@@ -120,8 +120,8 @@ const script = `
 // Extension setup
 let sessionId;
 let paymentPointer;
-let data;
 let intervalHandler;
+let data = { active: false };
 
 const scriptElement = document.createElement("script");
 scriptElement.innerHTML = script;
@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     sessionId = uuidv4();
     changeMonetizationState("pending");
     dispatchMonetizationPending({ paymentPointer, requestId: sessionId });
-    chrome.runtime.sendMessage({message: "monetizationPending"});
+    chrome.runtime.sendMessage({ message: "monetizationPending" });
   } else {
     data = "noMonetization";
   }
